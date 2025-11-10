@@ -1,26 +1,36 @@
+const carouselContainer = document.querySelector('.carousel-container');
 const carousel = document.querySelector('.carousel');
-let isDragging = false;
-let startX;
-let rotation = 0;
 
-carousel.addEventListener('mousedown', (e) => {
+let isDragging = false;
+let startX, startY;
+let rotationX = 0;
+let rotationY = 0;
+
+carouselContainer.addEventListener('mousedown', (e) => {
     isDragging = true;
     startX = e.clientX;
-    carousel.style.transition = 'none';
+    startY = e.clientY;
+    carouselContainer.style.transition = 'none';
 });
 
 document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
 
     const x = e.clientX;
+    const y = e.clientY;
     const deltaX = x - startX;
-    rotation += deltaX * 0.5; // Adjust the sensitivity of the panning
+    const deltaY = y - startY;
 
-    carousel.style.transform = `rotateY(${rotation}deg)`;
+    rotationY += deltaX * 0.5;
+    rotationX -= deltaY * 0.5; // Invert for natural feel
+
+    carouselContainer.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+
     startX = x;
+    startY = y;
 });
 
 document.addEventListener('mouseup', () => {
     isDragging = false;
-    carousel.style.transition = 'transform 0.5s';
+    carouselContainer.style.transition = 'transform 0.5s';
 });

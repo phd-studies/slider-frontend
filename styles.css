@@ -3,12 +3,15 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
+    background: #f0f0f0;
     overflow: hidden;
+    margin: 0;
 }
 
 .carousel-container {
     perspective: 1000px;
+    position: relative;
+    z-index: 2;
 }
 
 .carousel {
@@ -53,5 +56,5 @@ h1::after {
     top: 0;
     left: 0;
     -webkit-text-stroke: 1px #000;
-    color: transparent;
+    -webkit-text-fill-color: transparent;
 }
